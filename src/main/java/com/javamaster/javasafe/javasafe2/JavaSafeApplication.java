@@ -14,6 +14,7 @@ public class JavaSafeApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        JSafe.CURRENT_STAGE = stage;
         if(isSetup) {
             startLoginScreen(stage);
         }else{

@@ -1,5 +1,7 @@
 package com.javamaster.javasafe.javasafe2.util;
 
+import javafx.stage.Stage;
+
 import java.io.File;
 
 public class JSafe {
@@ -14,5 +16,6 @@ public class JSafe {
 
 
     public static String ENCRYPTED_MASTER_KEY;
+    public static Stage CURRENT_STAGE;
 
 }
