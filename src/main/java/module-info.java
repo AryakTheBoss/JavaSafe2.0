@@ -9,7 +9,10 @@ module com.javamaster.javasafe.javasafe2 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.desktop;
 
     opens com.javamaster.javasafe.javasafe2 to javafx.fxml;
     exports com.javamaster.javasafe.javasafe2;
+    exports com.javamaster.javasafe.javasafe2.controller.login;
+    opens com.javamaster.javasafe.javasafe2.controller.login to javafx.fxml;
 }
