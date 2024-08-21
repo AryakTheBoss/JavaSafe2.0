@@ -10,6 +10,7 @@ module com.javamaster.javasafe.javasafe2 {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
+    requires jasypt;
 
     opens com.javamaster.javasafe.javasafe2 to javafx.fxml;
     exports com.javamaster.javasafe.javasafe2;
