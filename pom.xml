@@ -118,7 +118,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.javamaster.javasafe.javasafe2/com.javamaster.javasafe.javasafe2.HelloApplication
+                                com.javamaster.javasafe.javasafe2/com.javamaster.javasafe.javasafe2.JavaSafeApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
