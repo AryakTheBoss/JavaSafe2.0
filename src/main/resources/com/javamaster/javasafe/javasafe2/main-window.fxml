@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javamaster.javasafe.javasafe2.controller.mainWindow.MainWindowController">
+   <children>
+      <HBox layoutY="550.0" prefHeight="100.0" prefWidth="1000.0">
+         <children>
+            <ButtonBar buttonMinWidth="250.0" prefHeight="100.0" prefWidth="1002.0">
+              <buttons>
+                <Button mnemonicParsing="false" text="Add Password" />
+                  <Button disable="true" layoutX="935.0" layoutY="48.0" mnemonicParsing="false" text="Remove Password" textAlignment="CENTER" />
+                  <Button layoutX="935.0" layoutY="48.0" mnemonicParsing="false" text="Copy to clipboard" />
+                  <Button defaultButton="true" layoutX="935.0" layoutY="48.0" mnemonicParsing="false" text="Logout" textFill="#ff2323" />
+              </buttons>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </ButtonBar>
+         </children></HBox>
+      <ScrollPane layoutY="-1.0" prefHeight="545.0" prefWidth="1075.0">
+         <content>
+            <ListView id="passwordList" fx:id="passwordList" prefHeight="542.0" prefWidth="1072.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
