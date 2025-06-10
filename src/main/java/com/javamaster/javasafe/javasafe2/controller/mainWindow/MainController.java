@@ -38,6 +38,7 @@ public class MainController {
 
     private void loadPasswords() {
         List<PasswordEntry> loadedPasswords = fileManager.loadPasswords();
+        System.out.println(loadedPasswords.toString());
         passwordEntries = FXCollections.observableArrayList(loadedPasswords);
         passwordListView.setItems(passwordEntries);
     }

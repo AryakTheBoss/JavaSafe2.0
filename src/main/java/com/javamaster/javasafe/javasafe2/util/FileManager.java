@@ -4,6 +4,7 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jasypt.util.text.AES256TextEncryptor;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -68,7 +69,7 @@ public class FileManager {
 
             // This is a simple way to store the list.
             // A more robust solution might use a proper serialization format like JSON or XML inside the encrypted string.
-            try (ObjectInputStream dataOis = new ObjectInputStream(new ByteArrayInputStream(decryptedData.getBytes("ISO-8859-1")))) {
+            try (ObjectInputStream dataOis = new ObjectInputStream(new ByteArrayInputStream(decryptedData.getBytes(StandardCharsets.ISO_8859_1)))) {
                 return (List<PasswordEntry>) dataOis.readObject();
             }
 
@@ -79,11 +80,16 @@ public class FileManager {
     }
 
     public void savePasswords(List<PasswordEntry> passwords) {
+        // This is the key fix. The ObservableList from JavaFX is not serializable.
+        // We must convert it to a standard ArrayList before attempting to serialize it.
+        List<PasswordEntry> serializableList = new ArrayList<>(passwords);
+
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(baos)) {
 
-            oos.writeObject(passwords);
-            String serializedData = baos.toString("ISO-8859-1");
+            // We write the serializable ArrayList, not the original ObservableList.
+            oos.writeObject(serializableList);
+            String serializedData = baos.toString(StandardCharsets.ISO_8859_1);
             String encryptedData = textEncryptor.encrypt(serializedData);
 
             try (ObjectOutputStream fileOos = new ObjectOutputStream(new FileOutputStream(PASSWORD_FILE))) {
