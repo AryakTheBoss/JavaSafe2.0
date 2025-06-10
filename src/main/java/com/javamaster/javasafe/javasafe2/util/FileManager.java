@@ -47,6 +47,11 @@ public class FileManager {
         }
     }
 
+    public void wipeData() throws IOException {
+        Files.delete(Path.of(MASTER_KEY_HASH_FILE));
+        Files.delete(Path.of(PASSWORD_FILE));
+    }
+
     public boolean checkMasterPassword(String password) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(MASTER_KEY_HASH_FILE))) {
             String storedHash = (String) ois.readObject();

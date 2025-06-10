@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class LoginController {
@@ -22,6 +23,8 @@ public class LoginController {
     private Label statusLabel;
 
     private FileManager fileManager;
+    private final int ALLOWED_PASSWORD_ATTEMPTS = 5;
+    private int failedAttempts = 0;
 
     @FXML
     public void initialize() {
@@ -46,6 +49,20 @@ public class LoginController {
             closeWindow();
         } else {
             statusLabel.setText("Incorrect password.");
+            failedAttempts++;
+            if(failedAttempts == 5){
+                try {
+                    statusLabel.setText("Password entered incorrectly too many times. Wiping data...");
+                    JOptionPane.showMessageDialog(null, "Password entered incorrectly too many times. Wiping data...", "Error!", JOptionPane.ERROR_MESSAGE);
+                    fileManager.wipeData();
+                    System.exit(0);
+                } catch (Exception e) {
+                    System.out.println("Error in wiping");
+                    e.printStackTrace();
+                }
+            }else if(failedAttempts >= 3){
+                statusLabel.setText("Incorrect password. "+(ALLOWED_PASSWORD_ATTEMPTS-failedAttempts)+" attempts remaining.");
+            }
         }
     }
 

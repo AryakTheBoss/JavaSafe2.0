@@ -20,7 +20,7 @@ public class JavaSafeApplication extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         launch(args);
     }
 
