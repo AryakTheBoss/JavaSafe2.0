@@ -2,6 +2,7 @@ package com.javamaster.javasafe.javasafe2.controller.login;
 
 import com.javamaster.javasafe.javasafe2.controller.mainWindow.MainController;
 import com.javamaster.javasafe.javasafe2.util.FileManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,10 +25,14 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        // We pass a dummy password here. The actual password check will use the entered password.
+        // We use a dummy password here just to create the FileManager instance
+        // to check if the master password file exists.
         fileManager = new FileManager("dummy");
         if (!fileManager.isMasterPasswordSet()) {
-            showCreateMasterPasswordDialog();
+            // This is the key fix. We use Platform.runLater() to ensure that this
+            // code runs after the FXML has been fully loaded and the initial scene
+            // is rendered. This guarantees that getScene().getWindow() will not be null.
+            Platform.runLater(this::showCreateMasterPasswordDialog);
         }
     }
 
@@ -46,12 +51,16 @@ public class LoginController {
 
     private void showCreateMasterPasswordDialog() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateMasterPassword.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javamaster/javasafe/javasafe2/CreateMasterPassword.fxml"));
             Parent root = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Create Master Password");
             dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            // This line was causing the NullPointerException. By using Platform.runLater,
+            // we ensure the passwordField's scene and window are available.
             dialogStage.initOwner(passwordField.getScene().getWindow());
+
             Scene scene = new Scene(root);
             dialogStage.setScene(scene);
 
@@ -67,7 +76,7 @@ public class LoginController {
 
     private void openMainWindow(String masterPassword) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javamaster/javasafe/javasafe2/Main.fxml"));
             Parent root = loader.load();
 
             MainController controller = loader.getController();

@@ -13,7 +13,7 @@ public class JavaSafeApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javamaster/javasafe/javasafe2/Login.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Password Manager Login");
         primaryStage.setScene(new Scene(root, 300, 200));

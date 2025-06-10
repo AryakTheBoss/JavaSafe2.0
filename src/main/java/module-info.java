@@ -16,4 +16,5 @@ module com.javamaster.javasafe.javasafe2 {
     exports com.javamaster.javasafe.javasafe2;
     exports com.javamaster.javasafe.javasafe2.controller.login;
     opens com.javamaster.javasafe.javasafe2.controller.login to javafx.fxml;
+    opens com.javamaster.javasafe.javasafe2.controller.mainWindow to javafx.fxml;
 }
