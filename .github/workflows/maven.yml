@@ -40,7 +40,7 @@ jobs:
     # Artifact name
         name:  JavaSafe2-Artifact # optional, default is artifact
     # A file, directory or wildcard pattern that describes what to upload
-        path: /target/*.jar
+        path: /home/runner/work/JavaSafe2.0/JavaSafe2.0/target/*-jar-with-dependencies.jar
     # The desired behavior if no files are found using the provided path.
        # Available Options: error
        # warn: Output a warning but do not fail the action
